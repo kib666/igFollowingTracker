@@ -4,7 +4,8 @@ document.getElementById("trackForm").addEventListener("submit", async function(e
     let username = document.getElementById("username").value.trim();
     if (!username) return alert("Enter a valid Instagram username!");
 
-    let response = await fetch("/track", {
+    // Send request to trigger Selenium IG Scraper
+    let response = await fetch("/scrape", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username })
@@ -13,7 +14,7 @@ document.getElementById("trackForm").addEventListener("submit", async function(e
     let result = await response.json();
     alert(result.message);
     document.getElementById("username").value = "";
-    loadUsers();
+    loadUsers(); // Reload users after scraping
 });
 
 async function loadUsers() {
